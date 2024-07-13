@@ -72,8 +72,14 @@ def main(songs):
 
 
 if __name__ == "__main__":
-    # accept a json file that has "name", "artist" pairs
     # e.g. [{"name": "Ai Wo Tsutaetaidatoka", "artist": "Aimyon"}, ...]
-    songs = json.loads(sys.argv[1])
+    if len(sys.argv) < 2:
+        print("Usage: python3 script.py 'song1-:-artist1' 'song2-:-artist2' ...")
+        sys.exit(1)
+
+    songs = []
+    for arg in sys.argv[1:]:
+        song, artist = arg.split("-:-")
+        songs.append({"name": song, "artist": artist})
 
     main(songs)
